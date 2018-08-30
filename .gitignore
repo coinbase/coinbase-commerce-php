@@ -1,0 +1,11 @@
+.DS_Store
+
+/vendor/
+.env
+.idea
+composer
+docker
+composer.phar
+composer.lock
+Dockerfile*
+.dockerignore

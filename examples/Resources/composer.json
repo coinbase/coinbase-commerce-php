@@ -1,0 +1,10 @@
+{
+    "name": "coinbase/example-coinbase-commerce-resources",
+    "description": "Examples of using Coinbase Commerce Resources",
+    "type": "project",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "require": {
+        "coinbase/coinbase-commerce": "^1.0.0"
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "name": "coinbase/example-coinbase-commerce-webhook",
+    "description": "Examples of using Coinbase Commerce Webhook verification",
+    "type": "project",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "require": {
+        "coinbase/coinbase-commerce": "^1.0.0"
+    }
+}
