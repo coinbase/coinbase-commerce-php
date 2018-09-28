@@ -5,9 +5,10 @@ use CoinbaseCommerce\Webhook;
 
 /**
  * To run this example please read README.md file
- * Past your webhook secret from Settings/Webhook section
+ * Past your Webhook Secret Key from Settings/Webhook section
+ * Make sure you don't store your Secret Key in your source code!
  */
-$secret = 'YOUR_SECRET_KEY';
+$secret = 'SECRET_KEY';
 $headerName = 'X-Cc-Webhook-Signature';
 $headers = getallheaders();
 $signraturHeader = isset($headers[$headerName]) ? $headers[$headerName] : null;

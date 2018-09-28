@@ -4,8 +4,12 @@ require_once __DIR__ . "/vendor/autoload.php";
 use CoinbaseCommerce\ApiClient;
 use CoinbaseCommerce\Resources\Event;
 
-// Init apiclient with you api key
-ApiClient::init("YOUR_API_KEY");
+/**
+ * Init ApiClient with your Api Key
+ * Your Api Keys are available in the Coinbase Commerce Dashboard.
+ * Make sure you don't store your API Key in your source code!
+ */
+ApiClient::init("API_KEY");
 
 try {
     $list = Event::getList(["limit" => 5]);

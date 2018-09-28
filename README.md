@@ -32,7 +32,8 @@ Parameters can be also be set post-initialization:
 ``` php
 use CoinbaseCommerce\ApiClient;
 
-$apiClientObj = ApiClient::init(<YOUR_API_KEY>);
+//Make sure you don't store your API Key in your source code!
+$apiClientObj = ApiClient::init(<API_KEY>);
 $apiClientObj->setTimeout(3);
 ```
 
@@ -67,6 +68,7 @@ composer require coinbase/coinbase-commerce
 ``` php
 use CoinbaseCommerce\ApiClient;
 
+//Make sure you don't store your API Key in your source code!
 ApiClient::init('API_KEY');
 ```
 ## Checkouts 
@@ -265,7 +267,8 @@ It's prudent to be conscious of warnings. The library will log all warnings to a
 ``` php
 use CoinbaseCommerce\ApiClient;
 
-$apiClientObj = ApiClient::init(<YOUR_API_KEY>);
+//Make sure you don't store your API Key in your source code!
+$apiClientObj = ApiClient::init(<API_KEY>);
 $apiClientObj->setLogger($logger);
 ```
 
