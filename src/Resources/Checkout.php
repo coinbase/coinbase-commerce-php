@@ -7,7 +7,7 @@ use CoinbaseCommerce\Resources\Operations\ReadMethodTrait;
 use CoinbaseCommerce\Resources\Operations\SaveMethodTrait;
 use CoinbaseCommerce\Resources\Operations\UpdateMethodTrait;
 
-class Checkout extends ApiResource
+class Checkout extends ApiResource implements ResourcePathInterface
 {
     use ReadMethodTrait, CreateMethodTrait, UpdateMethodTrait, DeleteMethodTrait, SaveMethodTrait;
 
