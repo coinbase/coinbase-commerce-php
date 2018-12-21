@@ -127,6 +127,7 @@ class ChargeTest extends BaseTest
         $this->appendRequest(200, $this->parseJsonFile('charge.json'));
         $id = '488fcbd5-eb82-42dc-8a2b-10fdf70e0bfe';
         $chargeObj = Charge::retrieve($id);
+        $this->assertRequested('GET', '/charges/' . $id, '');
         $id = $chargeObj->id;
         $this->appendRequest(200, $this->parseJsonFile('charge.json'));
         $chargeObj->resolve();
@@ -140,6 +141,7 @@ class ChargeTest extends BaseTest
         $this->appendRequest(200, $this->parseJsonFile('charge.json'));
         $id = '488fcbd5-eb82-42dc-8a2b-10fdf70e0bfe';
         $chargeObj = Charge::retrieve($id);
+        $this->assertRequested('GET', '/charges/' . $id, '');
         $id = $chargeObj->id;
         $this->appendRequest(200, $this->parseJsonFile('charge.json'));
         $chargeObj->cancel();

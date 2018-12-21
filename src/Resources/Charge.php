@@ -4,6 +4,7 @@ namespace CoinbaseCommerce\Resources;
 use CoinbaseCommerce\Resources\Operations\CreateMethodTrait;
 use CoinbaseCommerce\Resources\Operations\ReadMethodTrait;
 use CoinbaseCommerce\Resources\Operations\SaveMethodTrait;
+use CoinbaseCommerce\Util;
 
 class Charge extends ApiResource implements ResourcePathInterface
 {
