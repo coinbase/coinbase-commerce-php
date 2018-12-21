@@ -235,6 +235,29 @@ $pagination = $list->getPagination();
 ``` php
 $allCharges = Charge::getAll();
 ```
+
+### Resolve a charge
+Resolve a charge that has been previously marked as unresolved. 
+```
+$chargeObj = Charge::retrieve(<charge_id>);
+
+if ($chargeObj) {
+    $chargeObj->resolve();
+}
+```
+
+### Cancel a charge
+Cancels a charge that has been previously created. 
+Note: Only new charges can be successfully canceled. Once payment is detected, charge can no longer be canceled.
+
+```
+$chargeObj = Charge::retrieve(<charge_id>);
+
+if ($chargeObj) {
+    $chargeObj->confirm();
+}
+```
+
 ## Events
 [Events API Docs](https://commerce.coinbase.com/docs/api/#events)
 More examples on how to use events can be found in the [`examples/Resources/EventExample.php`](examples/Resources/EventExample.php) file

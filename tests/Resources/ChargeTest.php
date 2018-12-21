@@ -121,4 +121,32 @@ class ChargeTest extends BaseTest
         $this->assertCount(3, $list);
         $this->assertInstanceOf(Charge::getClassName(), $list[0]);
     }
+
+    public function testResolveMethod()
+    {
+        $this->appendRequest(200, $this->parseJsonFile('charge.json'));
+        $id = '488fcbd5-eb82-42dc-8a2b-10fdf70e0bfe';
+        $chargeObj = Charge::retrieve($id);
+        $this->assertRequested('GET', '/charges/' . $id, '');
+        $id = $chargeObj->id;
+        $this->appendRequest(200, $this->parseJsonFile('charge.json'));
+        $chargeObj->resolve();
+
+        $this->assertRequested('POST', "/charges/$id/resolve", '');
+        $this->assertEquals($id, $chargeObj->id);
+    }
+
+    public function testCancelMethod()
+    {
+        $this->appendRequest(200, $this->parseJsonFile('charge.json'));
+        $id = '488fcbd5-eb82-42dc-8a2b-10fdf70e0bfe';
+        $chargeObj = Charge::retrieve($id);
+        $this->assertRequested('GET', '/charges/' . $id, '');
+        $id = $chargeObj->id;
+        $this->appendRequest(200, $this->parseJsonFile('charge.json'));
+        $chargeObj->cancel();
+
+        $this->assertRequested('POST', "/charges/$id/cancel", '');
+        $this->assertEquals($id, $chargeObj->id);
+    }
 }

@@ -3,7 +3,7 @@ namespace CoinbaseCommerce\Resources;
 
 use CoinbaseCommerce\Resources\Operations\ReadMethodTrait;
 
-class Event extends ApiResource
+class Event extends ApiResource implements ResourcePathInterface
 {
     use ReadMethodTrait;
 
