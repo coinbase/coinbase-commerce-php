@@ -45,7 +45,7 @@ if ($chargeObj->id) {
     try {
         $retrievedCharge = Charge::retrieve($chargeObj->id);
         echo sprintf("Successfully retrieved charge\n");
-        echo $retrievedCharge;
+        echo "<pre>".$retrievedCharge."</pre>";
     } catch (\Exception $exception) {
         echo sprintf("Enable to retrieve charge. Error: %s \n", $exception->getMessage());
     }
