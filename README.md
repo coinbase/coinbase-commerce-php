@@ -52,7 +52,7 @@ All errors that occur during any interaction with the API will be raised as exce
 | InvalidRequestException      |     400     |   
 | ParamRequiredException       |     400     |  
 | ValidationException          |     400     |  
-| AuthenticationExceptionn     |     401     |  
+| AuthenticationException      |     401     |  
 | ResourceNotFoundException    |     404     |
 | RateLimitExceededException   |     429     |
 | InternalServerException      |     500     |
