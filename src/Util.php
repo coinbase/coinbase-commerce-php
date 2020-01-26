@@ -60,7 +60,7 @@ class Util
             }
         );
 
-        return implode($arguments, '/');
+        return implode('/',$arguments);
     }
 
     /**
