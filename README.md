@@ -231,7 +231,7 @@ foreach($list as $charge) {
 
 $pagination = $list->getPagination();
 ```
-### Get all changes
+### Get all charges
 ``` php
 $allCharges = Charge::getAll();
 ```
