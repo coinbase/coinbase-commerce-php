@@ -37,6 +37,11 @@ $apiClientObj = ApiClient::init(<API_KEY>);
 $apiClientObj->setTimeout(3);
 ```
 
+### Disable SSL Check
+``` php
+$apiClientObj->verifySsl(false);
+```
+
 The API resource class provides the following static methods: ``list, all, create, retrieve, updateById, deleteById``.  Additionally, the API resource class also provides the following instance methods: ``save, delete, insert, update``.
 
 Each API method returns an ``ApiResource`` which represents the JSON response from the API.

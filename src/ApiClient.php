@@ -42,6 +42,11 @@ class ApiClient
     private $httpClient;
 
     /**
+     * @var boolean
+     */
+    private $verifySSL = true ;
+
+    /**
      * ApiClient constructor.
      */
     private function __construct()
@@ -254,7 +259,7 @@ class ApiClient
     public function getHttpClient()
     {
         if (!isset($this->httpClient)) {
-            $this->httpClient = new Client();
+            $this->httpClient = new Client(['verify' => $this->verifySSL]);
         }
 
         return $this->httpClient;
@@ -353,5 +358,13 @@ class ApiClient
     public static function getClassName()
     {
         return get_called_class();
+    }
+
+    public function verifySsl($verify)
+    {
+        if(!is_bool($verify)) {
+           return;
+        }
+        $this->verifySSL = $verify ;
     }
 }
