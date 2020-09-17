@@ -7,7 +7,7 @@ use CoinbaseCommerce\Tests\BaseTest;
 
 class ChargeTest extends BaseTest
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         Charge::setClient($this->apiClient);

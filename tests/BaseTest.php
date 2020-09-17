@@ -16,7 +16,7 @@ class BaseTest extends TestCase
 
     protected $logger;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->initMockClient();
 
