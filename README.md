@@ -259,7 +259,7 @@ Note: Only new charges can be successfully canceled. Once payment is detected, c
 $chargeObj = Charge::retrieve(<charge_id>);
 
 if ($chargeObj) {
-    $chargeObj->confirm();
+    $chargeObj->cancel();
 }
 ```
 
