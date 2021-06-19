@@ -309,7 +309,7 @@ You can find a simple example of how to use this with Express in the [`examples/
 use CoinbaseCommerce\Webhook;
 
 try {
-    Webhook::verifySignature($signature, $body, $sharedSecret);
+    Webhook::verifySignature($body, $signature, $sharedSecret);
     echo 'Successfully verified';
 } catch (\Exception $exception) {
     echo $exception->getMessage();
