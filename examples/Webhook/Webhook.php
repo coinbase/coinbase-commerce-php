@@ -11,11 +11,11 @@ use CoinbaseCommerce\Webhook;
 $secret = 'SECRET_KEY';
 $headerName = 'X-Cc-Webhook-Signature';
 $headers = getallheaders();
-$signraturHeader = isset($headers[$headerName]) ? $headers[$headerName] : null;
+$signatureHeader = isset($headers[$headerName]) ? $headers[$headerName] : null;
 $payload = trim(file_get_contents('php://input'));
 
 try {
-    $event = Webhook::buildEvent($payload, $signraturHeader, $secret);
+    $event = Webhook::buildEvent($payload, $signatureHeader, $secret);
     http_response_code(200);
     echo sprintf('Successully verified event with id %s and type %s.', $event->id, $event->type);
 } catch (\Exception $exception) {
