@@ -26,62 +26,62 @@ $invoiceObj = new Invoice(
 
 try {
     $invoiceObj->save();
-    echo sprintf("Successfully created new charge with id: %s \n", $invoiceObj->id);
+    echo sprintf("Successfully created new invoice with id: %s \n", $invoiceObj->id);
 } catch (\Exception $exception) {
-    echo sprintf("Enable to create charge. Error: %s \n", $exception->getMessage());
+    echo sprintf("Enable to create invoice. Error: %s \n", $exception->getMessage());
 }
 
 if ($invoiceObj->id) {
-    // Retrieve charge by "id"
+    // Retrieve invoice by "id"
     try {
         $retrievedInvoice = Invoice::retrieve($invoiceObj->id);
-        echo sprintf("Successfully retrieved charge\n");
+        echo sprintf("Successfully retrieved invoice\n");
         echo $retrievedInvoice;
     } catch (\Exception $exception) {
-        echo sprintf("Enable to retrieve charge. Error: %s \n", $exception->getMessage());
+        echo sprintf("Enable to retrieve invoice. Error: %s \n", $exception->getMessage());
     }
 }
 
 try {
     $list = Invoice::getList(["limit" => 5]);
-    echo sprintf("Successfully got list of charges\n");
+    echo sprintf("Successfully got list of invoices\n");
 
     if (count($list)) {
         echo sprintf("Invoices in list:\n");
 
-        foreach ($list as $charge) {
-            echo $charge;
+        foreach ($list as $invoice) {
+            echo $invoice;
         }
     }
 
     echo sprintf("List's pagination:\n");
     print_r($list->getPagination());
 
-    echo sprintf("Number of all charges - %s \n", $list->countAll());
+    echo sprintf("Number of all invoices - %s \n", $list->countAll());
 } catch (\Exception $exception) {
-    echo sprintf("Enable to get list of charges. Error: %s \n", $exception->getMessage());
+    echo sprintf("Enable to get list of invoices. Error: %s \n", $exception->getMessage());
 }
 
 if (isset($list) && $list->hasNext()) {
     // Load next page with previous settings (limit=5)
     try {
         $list->loadNext();
-        echo sprintf("Next page of charges: \n");
-        foreach ($list as $charge) {
-            echo $charge;
+        echo sprintf("Next page of invoices: \n");
+        foreach ($list as $invoice) {
+            echo $invoice;
         }
     } catch (\Exception $exception) {
-        echo sprintf("Enable to get new page of charges. Error: %s \n", $exception->getMessage());
+        echo sprintf("Enable to get new page of invoices. Error: %s \n", $exception->getMessage());
     }
 }
 
-// Load all avaialbe charges
+// Load all available invoices
 try {
     $allInvoice = Invoice::getAll();
-    echo sprintf("Successfully got all charges:\n");
-    foreach ($allInvoice as $charge) {
-        echo $charge;
+    echo sprintf("Successfully got all invoices:\n");
+    foreach ($allInvoice as $invoice) {
+        echo $invoice;
     }
 } catch (\Exception $exception) {
-    echo sprintf("Enable to get all charges. Error: %s \n", $exception->getMessage());
+    echo sprintf("Enable to get all invoices. Error: %s \n", $exception->getMessage());
 }
