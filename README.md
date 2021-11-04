@@ -13,6 +13,7 @@ The official PHP library for the [Coinbase Commerce API](https://commerce.coinba
    * [Usage](#usage)
       * [Checkouts](#checkouts)
       * [Charges](#charges)
+      * [Invoices](#invoices)
       * [Events](#events)
       * [Webhooks](#webhooks)
       * [Warnings](#warnings)
@@ -261,6 +262,82 @@ $chargeObj = Charge::retrieve(<charge_id>);
 
 if ($chargeObj) {
     $chargeObj->cancel();
+}
+```
+
+## Invoices
+[Invoices API docs](https://commerce.coinbase.com/docs/api/#invoices)
+More examples on how to use charges can be found in the [`examples/Resources/InvoiceExample.php`](examples/Resources/InvoiceExample.php) file
+
+### Load invoice resource class
+``` php
+use CoinbaseCommerce\Resources\Invoice;
+```
+### Retrieve
+``` php
+$invoiceObj = Invoice::retrieve(<invoice_id>);
+```
+### Create
+``` php
+$invoiceData = [
+    'business_name' => 'Crypto Account LLC',
+    'customer_email' => 'customer@test.com',
+    'customer_name' => 'Test Customer',
+    'local_price' => [
+        'amount' => '100.00',
+        'currency' => 'USD'
+    ],
+    'memo' => 'Taxes and Accounting Services'
+];
+Invoice::create($invoiceData);
+
+// or
+$invoiceObj = new Invoice();
+
+$invoiceObj->business_name = 'Crypto Account LLC';
+$invoiceObj->customer_email = 'customer@test.com';
+$invoiceObj->customer_name = 'Test Customer';
+$invoiceObj->local_price = [
+    'amount' => '100.00',
+    'currency' => 'USD'
+];
+$invoiceObj->memo = 'Taxes and Accounting Services';
+$invoiceObj->save();
+```
+### List
+``` php
+$list = Invoice::getList();
+
+foreach($list as $invoice) {
+    var_dump($list);
+}
+
+$pagination = $list->getPagination();
+```
+### Get all invoices
+``` php
+$allInvoices = Invoice::getAll();
+```
+
+### Resolve an invoice
+Resolve an invoice that has been previously marked as unresolved. 
+```
+$invoiceObj = Invoice::retrieve(<charge_id>);
+
+if ($invoiceObj) {
+    $invoiceObj->resolve();
+}
+```
+
+### Void an invoice
+Voids an invoice that has been previously created. 
+Note: Only new or viewed invoices can be successfully voided. Once payment is detected, invoice can no longer be canceled.
+
+```
+$invoiceObj = Invoice::retrieve(<invoice_id>);
+
+if ($invoiceObj) {
+    $invoiceObj->void();
 }
 ```
 
