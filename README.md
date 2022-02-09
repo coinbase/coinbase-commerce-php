@@ -1,5 +1,6 @@
 [![CircleCI](https://circleci.com/gh/coinbase/coinbase-commerce-php/tree/master.svg?style=svg)](https://circleci.com/gh/coinbase/coinbase-commerce-php/tree/master)
 # Coinbase Commerce
+**Note: This repository is not actively maintained.**
 
 The official PHP library for the [Coinbase Commerce API](https://commerce.coinbase.com/docs/).
 
@@ -259,7 +260,7 @@ Note: Only new charges can be successfully canceled. Once payment is detected, c
 $chargeObj = Charge::retrieve(<charge_id>);
 
 if ($chargeObj) {
-    $chargeObj->confirm();
+    $chargeObj->cancel();
 }
 ```
 
