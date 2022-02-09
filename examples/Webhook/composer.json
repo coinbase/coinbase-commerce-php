@@ -5,6 +5,6 @@
     "license": "MIT",
     "minimum-stability": "stable",
     "require": {
-        "coinbase/coinbase-commerce": "^1.0.0"
+        "fossil01/coinbase-commerce": "^1.0.0"
     }
 }
