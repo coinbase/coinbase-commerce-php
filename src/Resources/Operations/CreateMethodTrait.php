@@ -1,4 +1,5 @@
 <?php
+
 namespace CoinbaseCommerce\Resources\Operations;
 
 use CoinbaseCommerce\Util;

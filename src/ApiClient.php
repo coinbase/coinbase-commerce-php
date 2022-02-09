@@ -1,4 +1,5 @@
 <?php
+
 namespace CoinbaseCommerce;
 
 use GuzzleHttp\Exception\RequestException;
@@ -6,10 +7,10 @@ use GuzzleHttp\Client;
 
 class ApiClient
 {
-    const API_KEY_PARAM = 'apiKey';
-    const BASE_API_URL_PARAM = 'baseApiUrl';
-    const API_VERSION_PARAM = 'apiVersion';
-    const TIMEOUT_PARAM = 'timeout';
+    public const API_KEY_PARAM = 'apiKey';
+    public const BASE_API_URL_PARAM = 'baseApiUrl';
+    public const API_VERSION_PARAM = 'apiVersion';
+    public const TIMEOUT_PARAM = 'timeout';
 
     /**
      * @var array
@@ -362,8 +363,8 @@ class ApiClient
 
     public function verifySsl($verify)
     {
-        if(!is_bool($verify)) {
-           return;
+        if (!is_bool($verify)) {
+            return;
         }
         $this->verifySSL = $verify ;
     }

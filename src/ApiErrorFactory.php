@@ -1,4 +1,5 @@
 <?php
+
 namespace CoinbaseCommerce;
 
 use CoinbaseCommerce\Exceptions\AuthenticationException;
@@ -42,7 +43,7 @@ class ApiErrorFactory
             ];
         }
 
-        return isset(self::$mapErrorMessageToClass[$message]) ? self::$mapErrorMessageToClass[$message]: null;
+        return isset(self::$mapErrorMessageToClass[$message]) ? self::$mapErrorMessageToClass[$message] : null;
     }
 
     /**
@@ -62,7 +63,7 @@ class ApiErrorFactory
             ];
         }
 
-        return isset(self::$mapErrorCodeToClass[$code]) ? self::$mapErrorCodeToClass[$code]: null;
+        return isset(self::$mapErrorCodeToClass[$code]) ? self::$mapErrorCodeToClass[$code] : null;
     }
 
     /**

@@ -1,4 +1,5 @@
 <?php
+
 namespace CoinbaseCommerce;
 
 /**
@@ -7,7 +8,7 @@ namespace CoinbaseCommerce;
  */
 class ApiResponse
 {
-    const REQUEST_ID_HEADER = 'x-request-id';
+    public const REQUEST_ID_HEADER = 'x-request-id';
     /**
      * @var array
      */
@@ -44,7 +45,7 @@ class ApiResponse
                 && !empty($lowerCaseKeys[strtolower(self::REQUEST_ID_HEADER)][0]) ?
                 $lowerCaseKeys[strtolower(self::REQUEST_ID_HEADER)][0] : null;
 
-            $this->bodyArray = !empty($this->body)? \json_decode($this->body, true): null;
+            $this->bodyArray = !empty($this->body) ? \json_decode($this->body, true) : null;
         }
     }
 }

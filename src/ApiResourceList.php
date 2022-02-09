@@ -1,11 +1,12 @@
 <?php
+
 namespace CoinbaseCommerce;
 
 class ApiResourceList extends \ArrayObject
 {
-    const CURSOR_PARAM = 'cursor_range';
-    const PREV_CURSOR = 'ending_before';
-    const NEXT_CURSOR = 'starting_after';
+    public const CURSOR_PARAM = 'cursor_range';
+    public const PREV_CURSOR = 'ending_before';
+    public const NEXT_CURSOR = 'starting_after';
 
     private static $apiClient;
 

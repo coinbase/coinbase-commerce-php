@@ -1,4 +1,5 @@
 <?php
+
 namespace CoinbaseCommerce\Exceptions;
 
 class SignatureVerificationException extends CoinbaseException

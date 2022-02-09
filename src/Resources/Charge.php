@@ -1,4 +1,5 @@
 <?php
+
 namespace CoinbaseCommerce\Resources;
 
 use CoinbaseCommerce\Resources\Operations\CreateMethodTrait;
@@ -8,7 +9,9 @@ use CoinbaseCommerce\Util;
 
 class Charge extends ApiResource implements ResourcePathInterface
 {
-    use CreateMethodTrait, ReadMethodTrait, SaveMethodTrait;
+    use CreateMethodTrait;
+    use ReadMethodTrait;
+    use SaveMethodTrait;
 
     /**
      * @return string

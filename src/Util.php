@@ -1,4 +1,5 @@
 <?php
+
 namespace CoinbaseCommerce;
 
 use CoinbaseCommerce\Resources\Charge;

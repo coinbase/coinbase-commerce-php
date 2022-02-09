@@ -1,4 +1,5 @@
 <?php
+
 namespace CoinbaseCommerce\Resources\Operations;
 
 use CoinbaseCommerce\Util;
@@ -62,7 +63,6 @@ trait ReadMethodTrait
         $client = static::getClient();
 
         $loadPage = function ($params, &$list) use (&$loadPage, $client, $path, $headers) {
-
             $response = $client->get($path, $params, $headers);
             $responseData = $response->bodyArray;
             $items = array_map(
@@ -73,9 +73,9 @@ trait ReadMethodTrait
             );
 
             $pagination = $responseData['pagination'];
-            $shown = $pagination['yielded'] ? : 0;
-            $limit = $pagination['limit'] ? : 0;
-            $cursorRange = $pagination['cursor_range'] ? : [];
+            $shown = $pagination['yielded'] ?: 0;
+            $limit = $pagination['limit'] ?: 0;
+            $cursorRange = $pagination['cursor_range'] ?: [];
 
             $list = array_merge($list, $items);
 
