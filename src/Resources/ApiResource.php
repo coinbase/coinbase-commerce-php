@@ -155,7 +155,7 @@ class ApiResource extends \ArrayObject
 
     public function asort(int $flags = \SORT_REGULAR): bool
     {
-        asort($this->attributes, $flags);
+        return \asort($this->attributes, $flags);
     }
 
     public function ksort(int $flags = \SORT_REGULAR): bool

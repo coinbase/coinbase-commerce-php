@@ -155,7 +155,7 @@ class ApiResourceList extends \ArrayObject
         }
     }
 
-    public function offsetGet(mixed $key)
+    public function offsetGet(mixed $key): mixed
     {
         return $this->items[$key];
     }
