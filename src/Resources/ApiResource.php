@@ -138,7 +138,7 @@ class ApiResource extends \ArrayObject
         return ApiClient::getInstance();
     }
 
-    public function offsetGet(mixed $key)
+    public function offsetGet(mixed $key): mixed
     {
         return $this->__get($key);
     }
