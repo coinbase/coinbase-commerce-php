@@ -1,5 +1,6 @@
 [![CircleCI](https://circleci.com/gh/coinbase/coinbase-commerce-php/tree/master.svg?style=svg)](https://circleci.com/gh/coinbase/coinbase-commerce-php/tree/master)
 # Coinbase Commerce
+**Note: This repository is not actively maintained.**
 
 The official PHP library for the [Coinbase Commerce API](https://commerce.coinbase.com/docs/).
 
@@ -35,6 +36,11 @@ use CoinbaseCommerce\ApiClient;
 //Make sure you don't store your API Key in your source code!
 $apiClientObj = ApiClient::init(<API_KEY>);
 $apiClientObj->setTimeout(3);
+```
+
+### Disable SSL Check
+``` php
+$apiClientObj->verifySsl(false);
 ```
 
 The API resource class provides the following static methods: ``list, all, create, retrieve, updateById, deleteById``.  Additionally, the API resource class also provides the following instance methods: ``save, delete, insert, update``.
@@ -254,7 +260,7 @@ Note: Only new charges can be successfully canceled. Once payment is detected, c
 $chargeObj = Charge::retrieve(<charge_id>);
 
 if ($chargeObj) {
-    $chargeObj->confirm();
+    $chargeObj->cancel();
 }
 ```
 
