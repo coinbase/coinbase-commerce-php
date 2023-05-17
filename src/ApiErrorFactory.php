@@ -17,7 +17,7 @@ class ApiErrorFactory
     private static array $mapErrorMessageToClass = [];
     private static array $mapErrorCodeToClass = [];
 
-    public static function getErrorClassByMessage(string $message): mixed
+    public static function getErrorClassByMessage(mixed $message): mixed
     {
         if (empty(self::$mapErrorMessageToClass)) {
             self::$mapErrorMessageToClass = [

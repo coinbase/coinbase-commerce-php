@@ -159,7 +159,7 @@ class ApiResourceList extends \ArrayObject
         return ApiClient::getInstance();
     }
 
-    public function setClient($client): void
+    public static function setClient($client): void
     {
         self::$apiClient = $client;
     }

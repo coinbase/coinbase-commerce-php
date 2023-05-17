@@ -56,7 +56,7 @@ class ApiClient
      */
     public static function init(string $apiKey, ?string $baseUrl = null, ?string $apiVersion = null, ?int $timeout = null): ApiClient
     {
-        if (!self::$instance) {
+        if (!isset(self::$instance) || !self::$instance) {
             self::$instance = new self();
         }
 
@@ -73,14 +73,14 @@ class ApiClient
      */
     public static function getInstance(): ApiClient
     {
-        if (!self::$instance) {
+        if (!isset(self::$instance) || !self::$instance) {
             throw new \Exception('Please init client first.');
         }
 
         return self::$instance;
     }
 
-    private function getParam(string $key): mixed
+    private function getParam(string $key)
     {
         if (array_key_exists($key, $this->params)) {
             return $this->params[$key];
@@ -111,9 +111,9 @@ class ApiClient
         return $this->getParam(self::API_KEY_PARAM);
     }
 
-    public function setBaseUrl(string $value): self
+    public function setBaseUrl(?string $value): self
     {
-        if (!empty($value) && \is_string($value)) {
+        if (!empty($value)) {
             if (substr($value, -1) !== '/') {
                 $value .= '/';
             }
@@ -129,7 +129,7 @@ class ApiClient
         return $this->getParam(self::BASE_API_URL_PARAM);
     }
 
-    public function setApiVersion(string $value): self
+    public function setApiVersion(?string $value): self
     {
         if (!empty($value)) {
             $this->setParam(self::API_VERSION_PARAM, $value);
@@ -143,7 +143,7 @@ class ApiClient
         return $this->getParam(self::API_VERSION_PARAM);
     }
 
-    public function setTimeout(int $value): self
+    public function setTimeout(?int $value): self
     {
         if (!empty($value)) {
             $this->setParam(self::TIMEOUT_PARAM, $value);
@@ -152,7 +152,7 @@ class ApiClient
         return $this;
     }
 
-    public function getTimeout(): mixed
+    public function getTimeout()
     {
         return $this->getParam(self::TIMEOUT_PARAM);
     }

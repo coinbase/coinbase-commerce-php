@@ -10,7 +10,7 @@ use CoinbaseCommerce\Tests\BaseTest;
 
 class CheckoutTest extends BaseTest
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         Checkout::setClient($this->apiClient);
