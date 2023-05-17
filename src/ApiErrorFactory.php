@@ -14,21 +14,10 @@ use GuzzleHttp\Exception\RequestException;
 
 class ApiErrorFactory
 {
-    /**
-     * @var array
-     */
-    private static $mapErrorMessageToClass = [];
+    private static array $mapErrorMessageToClass = [];
+    private static array $mapErrorCodeToClass = [];
 
-    /**
-     * @var array
-     */
-    private static $mapErrorCodeToClass = [];
-
-    /**
-     * @param $message
-     * @return mixed|null
-     */
-    public static function getErrorClassByMessage($message)
+    public static function getErrorClassByMessage(string $message): mixed
     {
         if (empty(self::$mapErrorMessageToClass)) {
             self::$mapErrorMessageToClass = [
@@ -42,14 +31,10 @@ class ApiErrorFactory
             ];
         }
 
-        return isset(self::$mapErrorMessageToClass[$message]) ? self::$mapErrorMessageToClass[$message]: null;
+        return self::$mapErrorMessageToClass[$message] ?? null;
     }
 
-    /**
-     * @param $code
-     * @return mixed|null
-     */
-    public static function getErrorClassByCode($code)
+    public static function getErrorClassByCode(int $code): mixed
     {
         if (empty(self::$mapErrorCodeToClass)) {
             self::$mapErrorCodeToClass = [
@@ -62,20 +47,17 @@ class ApiErrorFactory
             ];
         }
 
-        return isset(self::$mapErrorCodeToClass[$code]) ? self::$mapErrorCodeToClass[$code]: null;
+        return self::$mapErrorCodeToClass[$code] ?? null;
     }
 
-    /**
-     * @param RequestException $exception
-     */
-    public static function create($exception)
+    public static function create(RequestException $exception): mixed
     {
         $response = $exception->getResponse();
         $request = $exception->getRequest();
         $code = $exception->getCode();
         $data = $response ? json_decode($response->getBody(), true) : null;
-        $errorMessage = isset($data['error']['message']) ? $data['error']['message'] : $exception->getMessage();
-        $errorId = isset($data['error']['type']) ? $data['error']['type'] : null;
+        $errorMessage = $data['error']['message'] ?? $exception->getMessage();
+        $errorId = $data['error']['type'] ?? null;
 
         $errorClass = self::getErrorClassByMessage($errorId) ?: self::getErrorClassByCode($code) ?: ApiException::getClassName();
 
