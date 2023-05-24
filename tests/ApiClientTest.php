@@ -6,17 +6,15 @@ use PHPUnit\Framework\TestCase;
 
 class ApiClientTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
     }
 
-    /**
-     * @expectedException \Exception
-     * @expectedExceptionMessage Please init client first.
-     */
     public function testFailOnGetInstanceWithoutInit()
     {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage("Please init client first.");
         ApiClient::getInstance();
     }
 

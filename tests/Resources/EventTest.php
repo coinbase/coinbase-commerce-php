@@ -8,7 +8,7 @@ use CoinbaseCommerce\Tests\BaseTest;
 
 class EventTest extends BaseTest
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         Event::setClient($this->apiClient);

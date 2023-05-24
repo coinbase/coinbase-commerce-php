@@ -7,7 +7,11 @@ use CoinbaseCommerce\Resources\Event;
 
 class Webhook
 {
-    public static function buildEvent($payload, $sigHeader, $secret)
+    /**
+     * @throws SignatureVerificationException
+     * @throws InvalidResponseException
+     */
+    public static function buildEvent(string $payload, string $sigHeader, string $secret): Event
     {
         $data = null;
 
@@ -26,7 +30,10 @@ class Webhook
         return new Event($data['event']);
     }
 
-    public static function verifySignature($payload, $sigHeader, $secret)
+    /**
+     * @throws SignatureVerificationException
+     */
+    public static function verifySignature(string $payload, string $sigHeader, string $secret): void
     {
         $computedSignature = \hash_hmac('sha256', $payload, $secret);
 

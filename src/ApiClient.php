@@ -21,10 +21,7 @@ class ApiClient
         self::TIMEOUT_PARAM => 3
     ];
 
-    /**
-     * @var ApiClient
-     */
-    private static $instance;
+    private static ApiClient $instance;
 
     /**
      * @var
@@ -41,10 +38,7 @@ class ApiClient
      */
     private $httpClient;
 
-    /**
-     * @var boolean
-     */
-    private $verifySSL = true ;
+    private bool $verifySSL = true ;
 
     /**
      * ApiClient constructor.
@@ -58,15 +52,11 @@ class ApiClient
     }
 
     /**
-     * @param string $apiKey
-     * @param null|string $baseUrl
-     * @param null|string $apiVersion
-     * @param null|integer $timeout
-     * @return ApiClient
+     * @throws \Exception
      */
-    public static function init($apiKey, $baseUrl = null, $apiVersion = null, $timeout = null)
+    public static function init(string $apiKey, ?string $baseUrl = null, ?string $apiVersion = null, ?int $timeout = null): ApiClient
     {
-        if (!self::$instance) {
+        if (!isset(self::$instance) || !self::$instance) {
             self::$instance = new self();
         }
 
@@ -79,46 +69,34 @@ class ApiClient
     }
 
     /**
-     * @return ApiClient
      * @throws \Exception
      */
-    public static function getInstance()
+    public static function getInstance(): ApiClient
     {
-        if (!self::$instance) {
+        if (!isset(self::$instance) || !self::$instance) {
             throw new \Exception('Please init client first.');
         }
 
         return self::$instance;
     }
 
-    /**
-     * @param string $key
-     * @return mixed
-     */
-    private function getParam($key)
+    private function getParam(string $key)
     {
         if (array_key_exists($key, $this->params)) {
             return $this->params[$key];
         }
     }
 
-    /**
-     * @param string $key
-     * @param mixed $value
-     * @return $this
-     */
-    private function setParam($key, $value)
+    private function setParam(string $key,  mixed $value): self
     {
         $this->params[$key] = $value;
         return $this;
     }
 
     /**
-     * @param string $value
-     * @return $this
      * @throws \Exception
      */
-    public function setApiKey($value)
+    public function setApiKey(string $value): self
     {
         if (empty($value)) {
             throw new \Exception('Api Key is required');
@@ -128,21 +106,14 @@ class ApiClient
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getApiKey()
+    public function getApiKey(): mixed
     {
         return $this->getParam(self::API_KEY_PARAM);
     }
 
-    /**
-     * @param string $value
-     * @return $this
-     */
-    public function setBaseUrl($value)
+    public function setBaseUrl(?string $value): self
     {
-        if (!empty($value) && \is_string($value)) {
+        if (!empty($value)) {
             if (substr($value, -1) !== '/') {
                 $value .= '/';
             }
@@ -153,65 +124,42 @@ class ApiClient
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getBaseUrl()
+    public function getBaseUrl(): mixed
     {
         return $this->getParam(self::BASE_API_URL_PARAM);
     }
 
-    /**
-     * @param string $value
-     * @return $this
-     */
-    public function setApiVersion($value)
+    public function setApiVersion(?string $value): self
     {
-        if (!empty($value) && \is_string($value)) {
+        if (!empty($value)) {
             $this->setParam(self::API_VERSION_PARAM, $value);
         }
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getApiVersion()
+    public function getApiVersion(): mixed
     {
         return $this->getParam(self::API_VERSION_PARAM);
     }
 
-    /**
-     * @param integer $value
-     * @return $this
-     */
-    public function setTimeout($value)
+    public function setTimeout(?int $value): self
     {
-        if (!empty($value) && \is_numeric($value)) {
+        if (!empty($value)) {
             $this->setParam(self::TIMEOUT_PARAM, $value);
         }
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getTimeout()
     {
         return $this->getParam(self::TIMEOUT_PARAM);
     }
 
-    /**
-     * @param array $query
-     * @param array $body
-     * @param array $headers
-     * @return array
-     */
-    private function generateRequestOptions($query = [], $body = [], $headers = [])
+    private function generateRequestOptions(array $query = [], array $body = [], array $headers = []): array
     {
-        return $options = [
+        return [
             'headers' => array_merge(
                 [
                     'Content-Type' => 'application/json',
@@ -228,13 +176,7 @@ class ApiClient
         ];
     }
 
-    /**
-     * @param string $method
-     * @param string $path
-     * @param array $options
-     * @return ApiResponse
-     */
-    private function makeRequest($method, $path, $options)
+    private function makeRequest(string $method, string $path, array $options): ApiResponse
     {
         try {
             $path = Util::joinPath($this->getParam('baseApiUrl'), $path);
@@ -256,7 +198,7 @@ class ApiClient
         }
     }
 
-    public function getHttpClient()
+    public function getHttpClient(): Client
     {
         if (!isset($this->httpClient)) {
             $this->httpClient = new Client(['verify' => $this->verifySSL]);
@@ -265,80 +207,46 @@ class ApiClient
         return $this->httpClient;
     }
 
-    /**
-     * @param $logger
-     */
-    public function setLogger($logger)
+    public function setLogger($logger): void
     {
         $this->logger = $logger;
     }
 
-    /**
-     * @param $path
-     * @param array $queryParams
-     * @param array $headers
-     * @return ApiResponse
-     */
-    public function get($path, $queryParams = [], $headers = [])
+    public function get(string $path, array $queryParams = [], array $headers = []): ApiResponse
     {
         $options = $this->generateRequestOptions($queryParams, $headers);
         return $this->makeRequest('GET', $path, $options);
     }
 
-    /**
-     * @param string $path
-     * @param array $body
-     * @param array $headers
-     * @return ApiResponse
-     */
-    public function post($path, $body, $headers)
+    public function post(string $path, array $body, array $headers): ApiResponse
     {
         $options = $this->generateRequestOptions([], $body, $headers = []);
         return $this->makeRequest('POST', $path, $options);
     }
 
-    /**
-     * @param string $path
-     * @param array $headers
-     * @return ApiResponse
-     */
-    public function put($path, $body, $headers)
+    public function put(string $path, array $body, array $headers): ApiResponse
     {
         $options = $this->generateRequestOptions([], $body, $headers = []);
         return $this->makeRequest('PUT', $path, $options);
     }
 
-    /**
-     * @param string $path
-     * @param array $headers
-     * @return ApiResponse
-     */
-    public function delete($path, $headers = [])
+    public function delete(string $path, array $headers = []): ApiResponse
     {
         $options = $this->generateRequestOptions([], [], $headers);
         return $this->makeRequest('DELETE', $path, $options);
     }
 
-    /**
-     * @param ApiResponse $response
-     */
-    public function setLastResponse($response)
+    public function setLastResponse(ApiResponse $response): void
     {
         $this->response = $response;
     }
 
-    /**
-     * @return ApiResponse
-     */
-    public function getLastResponse()
+    public function getLastResponse(): ApiResponse
     {
         return $this->response;
     }
 
-    /**
-     * @param ApiResponse $response
-     */
-    public function logWarnings($response)
+    public function logWarnings(ApiResponse $response): void
     {
         if (!$this->logger) {
             return;
@@ -355,12 +263,12 @@ class ApiClient
         }
     }
 
-    public static function getClassName()
+    public static function getClassName(): string
     {
         return get_called_class();
     }
 
-    public function verifySsl($verify)
+    public function verifySsl($verify): void
     {
         if(!is_bool($verify)) {
            return;

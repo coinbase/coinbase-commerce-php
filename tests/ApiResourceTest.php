@@ -2,11 +2,14 @@
 namespace CoinbaseCommerce\Tests;
 
 use CoinbaseCommerce\Resources\ApiResource;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class ApiResourceTest extends TestCase
 {
-    public function setUp()
+    private MockObject $apiResourceStub;
+
+    public function setUp(): void
     {
         parent::setUp();
         $this->apiResourceStub = $this->getMockForAbstractClass(ApiResource::getClassName());
@@ -62,12 +65,12 @@ class ApiResourceTest extends TestCase
             ]
         );
 
-        $this->assertEquals('Test Name', $this->apiResourceStub->name);
-        $this->assertEquals('value1', $this->apiResourceStub->meta['option1']);
-        $this->apiResourceStub->name = 'New Name';
-        $this->apiResourceStub->meta['option1'] = 'value2';
-        $this->assertEquals('New Name', $this->apiResourceStub->name);
-        $this->assertEquals('value2', $this->apiResourceStub->meta['option1']);
+        $this->assertEquals('Test Name', $this->apiResourceStub["name"]);
+        $this->assertEquals('value1', $this->apiResourceStub["meta"]['option1']);
+        $this->apiResourceStub["name"] = 'New Name';
+        $this->apiResourceStub["meta"]['option1'] = 'value2';
+        $this->assertEquals('New Name', $this->apiResourceStub["name"]);
+        $this->assertEquals('value2', $this->apiResourceStub["meta"]['option1']);
     }
 
     public function testDeleteAttribute()

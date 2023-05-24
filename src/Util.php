@@ -7,15 +7,12 @@ use CoinbaseCommerce\Resources\Event;
 
 class Util
 {
-    private static $mapResourceByName = [];
+    private static array $mapResourceByName = [];
 
-    /**
-     * @param mixed $response
-     */
-    public static function convertToApiObject($response)
+    public static function convertToApiObject(mixed $response): mixed
     {
         if ($response instanceof ApiResponse) {
-            $response = isset($response->bodyArray['data']) ? $response->bodyArray['data'] : null;
+            $response = $response->bodyArray['data'] ?? null;
         }
 
         if (is_array($response)) {
@@ -34,7 +31,7 @@ class Util
         return $response;
     }
 
-    public static function getResourceClassByName($name)
+    public static function getResourceClassByName($name): mixed
     {
         if (empty(self::$mapResourceByName)) {
             self::$mapResourceByName = [
@@ -44,13 +41,10 @@ class Util
             ];
         }
 
-        return isset(self::$mapResourceByName[$name]) ? self::$mapResourceByName[$name] : null;
+        return self::$mapResourceByName[$name] ?? null;
     }
 
-    /**
-     * @return string
-     */
-    public static function joinPath()
+    public static function joinPath(): string
     {
         $arguments = func_get_args();
         array_walk(
@@ -63,12 +57,7 @@ class Util
         return implode('/', $arguments);
     }
 
-    /**
-     * @param mixed $prop1
-     * @param mixed $prop2
-     * @return bool
-     */
-    public static function equal($prop1, $prop2)
+    public static function equal(mixed $prop1, mixed $prop2): bool
     {
         if (is_array($prop1)) {
             foreach ($prop1 as $key => $value) {
@@ -89,12 +78,7 @@ class Util
         return $prop1 === $prop2;
     }
 
-    /**
-     * @param string $str1
-     * @param string $str2
-     * @return bool
-     */
-    public static function hashEqual($str1, $str2)
+    public static function hashEqual(string $str1, string $str2): bool
     {
         if (function_exists('hash_equals')) {
             return \hash_equals($str1, $str2);
